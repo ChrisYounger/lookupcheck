@@ -20,8 +20,9 @@ Analyse lookup files for common errors, such as:
 # Example:
 
 ```
-| rest /servicesNS/-/-/data/lookup-table-files 
+| rest splunk_server=local /servicesNS/-/-/data/lookup-table-files 
 | rename eai:data as path
+| search NOT path IN ("*.kmz", "*.alive")
 | table path
 | lookupcheck
 | search NOT lookupcheck_status="OK"
